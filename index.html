@@ -609,6 +609,13 @@ footer {
 </style>
 </head>
 <body>
+<!-- BGM 오디오 -->
+<audio id="bgm" loop autoplay>
+  <source src="bgm.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 음소거 토글 버튼 -->
+<button onclick="toggleBGM()" id="bgm-btn" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; width: 44px; height: 44px; font-size: 20px; cursor: pointer;">🔊</button>
 
 <!-- HEADER -->
 <header>
@@ -964,6 +971,26 @@ if (cardnewsCards.length && cardnewsDots.length) {
 document.querySelector('.form-submit').addEventListener('click', () => {
   alert('문의가 접수되었습니다. 빠른 시일 내에 연락 드리겠습니다.');
 });
+</script>
+<script>
+  const bgm = document.getElementById('bgm');
+  bgm.volume = 0.3; // 볼륨 30%
+
+  // 브라우저 자동재생 정책 대응
+  document.addEventListener('click', () => {
+    if (bgm.paused) bgm.play();
+  }, { once: true });
+
+  function toggleBGM() {
+    const btn = document.getElementById('bgm-btn');
+    if (bgm.muted) {
+      bgm.muted = false;
+      btn.textContent = '🔊';
+    } else {
+      bgm.muted = true;
+      btn.textContent = '🔇';
+    }
+  }
 </script>
 </body>
 </html>
