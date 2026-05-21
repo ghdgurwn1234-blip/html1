@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>(주)비에이텍 - 유체 엔지니어링 전문</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0056b3;
+  --accent: #0099e6;
+  --water: #00c6ff;
+  --dark: #0a0f1e;
+  --light: #f0f7ff;
+  --mid: #1a2744;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #222;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ── HEADER ── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: rgba(10, 15, 30, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 198, 255, 0.15);
+}
+
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 24px;
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px; letter-spacing: 2px;
+  color: #fff;
+}
+.logo span { color: var(--water); }
+
+nav a {
+  color: rgba(255,255,255,0.75);
+  font-size: 13px; font-weight: 500;
+  margin-left: 28px;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+  position: relative;
+}
+nav a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
+  background: var(--water);
+  transform: scaleX(0); transition: transform 0.25s;
+}
+nav a:hover { color: #fff; }
+nav a:hover::after { transform: scaleX(1); }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh; min-height: 620px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(160deg, rgba(0,86,179,0.72) 0%, rgba(0,15,40,0.88) 60%),
+    url('https://images.unsplash.com/photo-1518081461904-9d8f136351c2?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+}
+
+/* animated water ripple */
+.ripple {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(0,198,255,0.18) 0%, transparent 70%);
+  animation: pulse 5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 0.6; transform: scaleY(1); }
+  50%      { opacity: 1;   transform: scaleY(1.12); }
+}
+
+/* flowing lines */
+.hero-lines {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+}
+.hero-lines span {
+  position: absolute; bottom: -10px;
+  width: 1px; height: 35%;
+  background: linear-gradient(to top, rgba(0,198,255,0.5), transparent);
+  animation: rise 6s ease-in infinite;
+}
+.hero-lines span:nth-child(1) { left: 15%; animation-delay: 0s; height: 30%; }
+.hero-lines span:nth-child(2) { left: 32%; animation-delay: 1.5s; height: 45%; }
+.hero-lines span:nth-child(3) { left: 55%; animation-delay: 0.8s; height: 25%; }
+.hero-lines span:nth-child(4) { left: 72%; animation-delay: 2.2s; height: 40%; }
+.hero-lines span:nth-child(5) { left: 88%; animation-delay: 1s;   height: 32%; }
+@keyframes rise {
+  0%   { opacity: 0; transform: translateY(0); }
+  20%  { opacity: 1; }
+  80%  { opacity: 0.5; }
+  100% { opacity: 0; transform: translateY(-100vh); }
+}
+
+.hero-content { position: relative; z-index: 2; padding: 0 20px; }
+
+.hero-tag {
+  display: inline-block;
+  border: 1px solid rgba(0,198,255,0.6);
+  color: var(--water);
+  font-size: 12px; font-weight: 500; letter-spacing: 3px;
+  padding: 6px 18px; border-radius: 20px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 72px);
+  font-weight: 900; color: #fff; line-height: 1.15;
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+.hero h1 em { color: var(--water); font-style: normal; }
+
+.hero p {
+  font-size: 17px; color: rgba(255,255,255,0.7);
+  margin-bottom: 44px;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+
+.hero-btns { display: flex; gap: 16px; justify-content: center; animation: fadeUp 0.8s 0.6s ease both; }
+
+.btn-primary {
+  background: var(--accent); color: #fff;
+  padding: 14px 32px; border-radius: 4px;
+  font-weight: 700; font-size: 14px; letter-spacing: 1px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--water); transform: translateY(-2px); }
+
+.btn-outline {
+  border: 1px solid rgba(255,255,255,0.4); color: #fff;
+  padding: 14px 32px; border-radius: 4px;
+  font-weight: 500; font-size: 14px;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.btn-outline:hover { border-color: var(--water); color: var(--water); transform: translateY(-2px); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* scroll indicator */
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  color: rgba(255,255,255,0.4); font-size: 11px; letter-spacing: 2px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: fadeUp 1s 1s ease both;
+}
+.scroll-hint::after {
+  content: '';
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, rgba(0,198,255,0.6), transparent);
+  animation: drip 1.8s ease-in-out infinite;
+}
+@keyframes drip { 0%,100% { opacity:0.3; } 50% { opacity:1; } }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  background: var(--dark);
+  padding: 40px 24px;
+}
+.stats-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; text-align: center;
+}
+.stat-item { padding: 20px; border-right: 1px solid rgba(255,255,255,0.08); }
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px; color: var(--water); letter-spacing: 2px; line-height: 1;
+}
+.stat-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 1px; }
+
+/* ── SECTIONS ── */
+section { scroll-margin-top: 72px; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 100px 24px; }
+
+.section-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 4px;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 44px); font-weight: 900;
+  color: var(--dark); line-height: 1.2; margin-bottom: 16px;
+}
+.section-sub { font-size: 16px; color: #666; max-width: 560px; line-height: 1.8; }
+
+/* ── SERVICES ── */
+#services { background: var(--light); }
+
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 60px;
+}
+
+.service-card {
+  background: #fff;
+  padding: 48px 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,86,179,0.08);
+  box-shadow: 0 4px 24px rgba(0,86,179,0.06);
+  transition: transform 0.25s, box-shadow 0.25s;
+  position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--water));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,86,179,0.12); }
+.service-card:hover::before { transform: scaleX(1); }
+
+.card-icon {
+  width: 60px; height: 60px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px; font-size: 26px;
+}
+.service-card h3 { font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
+.service-card p { font-size: 14px; color: #777; line-height: 1.8; }
+
+/* ── ABOUT ── */
+#about { background: #fff; }
+
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center; margin-top: 20px;
+}
+
+.about-visual {
+  position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;
+}
+.about-visual img { width: 100%; height: 100%; object-fit: cover; }
+.about-visual-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,86,179,0.3), rgba(0,198,255,0.1));
+}
+.about-badge {
+  position: absolute; bottom: 28px; left: 28px;
+  background: var(--dark); color: #fff;
+  padding: 16px 24px; border-radius: 8px;
+  border-left: 3px solid var(--water);
+}
+.about-badge strong { display: block; font-size: 28px; font-family: 'Bebas Neue', sans-serif; color: var(--water); }
+.about-badge span { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+.about-text .section-title { margin-top: 8px; }
+.about-text p { font-size: 15px; color: #555; line-height: 2; margin-top: 24px; }
+.about-text p + p { margin-top: 16px; }
+
+.value-list { margin-top: 36px; display: flex; flex-direction: column; gap: 12px; }
+.value-item {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 14px; font-weight: 500; color: var(--dark);
+}
+.value-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--water));
+  flex-shrink: 0;
+}
+
+/* ── CONTACT ── */
+#contact { background: var(--dark); }
+#contact .section-tag { color: var(--water); }
+#contact .section-title { color: #fff; }
+#contact .section-sub { color: rgba(255,255,255,0.5); }
+
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; margin-top: 60px;
+}
+
+.contact-info { display: flex; flex-direction: column; gap: 24px; }
+
+.contact-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 24px; border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: border-color 0.2s;
+}
+.contact-item:hover { border-color: rgba(0,198,255,0.3); }
+
+.contact-icon {
+  width: 44px; height: 44px; border-radius: 8px;
+  background: rgba(0,198,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.contact-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--water); margin-bottom: 4px; }
+.contact-value { font-size: 15px; color: rgba(255,255,255,0.85); }
+
+.map-box {
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  display: flex; flex-direction: column;
+}
+.map-placeholder {
+  flex: 1; min-height: 280px;
+  background: rgba(0,86,179,0.12);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.3); font-size: 14px; text-align: center; padding: 20px;
+  flex-direction: column; gap: 12px;
+}
+.map-placeholder .map-icon { font-size: 40px; opacity: 0.5; }
+.map-addr {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  font-size: 13px; color: rgba(255,255,255,0.5);
+}
+.map-addr strong { color: rgba(255,255,255,0.8); display: block; margin-bottom: 4px; }
+
+/* ── FOOTER ── */
+footer {
+  background: #060b17;
+  padding: 40px 24px;
+  border-top: 1px solid rgba(0,198,255,0.1);
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff; }
+.footer-logo span { color: var(--water); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+/* ── INQUIRY FORM ── */
+.inquiry-form { display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--water); margin-bottom: 8px; }
+.form-group input,
+.form-group textarea {
+  width: 100%; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px; padding: 12px 16px;
+  color: #fff; font-family: 'Noto Sans KR', sans-serif; font-size: 14px;
+  outline: none; transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group textarea:focus { border-color: rgba(0,198,255,0.5); }
+.form-group textarea { height: 120px; resize: none; }
+.form-submit {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: #fff; border: none; padding: 14px 32px;
+  border-radius: 6px; font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  align-self: flex-start;
+}
+.form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .form-row { grid-template-columns: 1fr; }
+  nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="nav-inner">
+    <div class="logo">BA<span>TECH</span> (주)비에이텍</div>
+    <nav>
+      <a href="#about">기업 소개</a>
+      <a href="#services">주요 서비스</a>
+      <a href="#contact">찾아오시는 길</a>
+      <a href="#inquiry">문의</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="ripple"></div>
+  <div class="hero-lines">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">FLUID ENGINEERING SOLUTION</div>
+    <h1>맑고 깨끗한<br>물의 흐름을 <em>완성</em>합니다</h1>
+    <p>유체 엔지니어링 솔루션 전문기업 (주)비에이텍</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">서비스 보기</a>
+      <a href="#inquiry" class="btn-outline">문의하기</a>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">ONE-STOP SERVICE</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">유지보수 대응</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">강원</div>
+      <div class="stat-label">춘천 기반 전문기업</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-tag">WHAT WE DO</div>
+    <h2 class="section-title">One-Stop Service</h2>
+    <p class="section-sub">펌프 제작부터 설치, 수리까지 모든 유체 엔지니어링 솔루션을 한 곳에서 제공합니다.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="card-icon">⚙️</div>
+        <h3>PUMP 제작</h3>
+        <p>우수한 기술력을 바탕으로 산업 현장의 요구에 최적화된 워터펌프를 직접 설계·제작합니다. 고성능과 내구성을 동시에 실현합니다.</p>
+      </div>
+      <div class="service-card">
+        <div class="card-icon">🔧</div>
+        <h3>완벽 설치</h3>
+        <p>현장 환경을 면밀히 분석한 후 맞춤형 정밀 설치 서비스를 제공합니다. 최적의 효율과 안전한 운용을 보장합니다.</p>
+      </div>
+      <div class="service-card">
+        <div class="card-icon">🛠️</div>
+        <h3>정확 수리</h3>
+        <p>신속하고 정확한 유지보수 및 수리 서비스로 설비 다운타임을 최소화합니다. 언제든 믿고 맡길 수 있는 파트너입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800" alt="공장 설비" loading="lazy">
+        <div class="about-visual-overlay"></div>
+        <div class="about-badge">
+          <strong>BAT</strong>
+          <span>비에이텍 유체 엔지니어링</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-tag">ABOUT US</div>
+        <h2 class="section-title">맑고 깨끗한 물을<br>안전하게 공급합니다</h2>
+        <p>(주)비에이텍은 유체 엔지니어링 솔루션 전문기업으로서, 워터펌프의 제작부터 설치, 수리까지 전 과정을 아우르는 원스톱 서비스를 제공합니다.</p>
+        <p>우리는 단순한 장비 공급을 넘어 산업 현장과 생활 공간에 가장 효율적인 물의 흐름을 완성하기 위해 도전하고 있으며, 신뢰와 기술로 보답하는 든든한 파트너가 되겠습니다.</p>
+        <div class="value-list">
+          <div class="value-item"><div class="value-dot"></div>검증된 기술력과 풍부한 현장 경험</div>
+          <div class="value-item"><div class="value-dot"></div>고객 맞춤형 유체 엔지니어링 솔루션</div>
+          <div class="value-item"><div class="value-dot"></div>신속하고 책임감 있는 사후 서비스</div>
+          <div class="value-item"><div class="value-dot"></div>강원 지역 기반의 탄탄한 인프라</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT & MAP -->
+<section id="contact">
+  <div class="container">
+    <div class="section-tag">LOCATION & CONTACT</div>
+    <h2 class="section-title">찾아오시는 길</h2>
+    <p class="section-sub">강원특별자치도 춘천시에 위치한 비에이텍을 언제든 방문해 주세요.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">ADDRESS</div>
+            <div class="contact-value">강원특별자치도 춘천시 퇴계공단2길 64</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">TEL</div>
+            <div class="contact-value">033-264-9243</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📠</div>
+          <div>
+            <div class="contact-label">FAX</div>
+            <div class="contact-value">033-251-5747</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">E-MAIL</div>
+            <div class="contact-value">gwf0123@hanmail.net</div>
+          </div>
+        </div>
+      </div>
+      <div class="map-box">
+        <div class="map-placeholder">
+          <div class="map-icon">🗺️</div>
+          <div>지도는 실제 배포 환경에서<br>Google Maps 또는 카카오맵으로 연동됩니다</div>
+        </div>
+        <div class="map-addr">
+          <strong>(주)비에이텍</strong>
+          강원특별자치도 춘천시 퇴계공단2길 64
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INQUIRY -->
+<section id="inquiry" style="background:#fff;">
+  <div class="container">
+    <div class="section-tag">GET IN TOUCH</div>
+    <h2 class="section-title">문의하기</h2>
+    <p class="section-sub" style="margin-bottom:48px;">제품 및 서비스에 대해 궁금한 점을 남겨주시면 신속하게 답변 드리겠습니다.</p>
+    <div class="inquiry-form" style="max-width:640px;">
+      <div class="form-row">
+        <div class="form-group">
+          <label>이름</label>
+          <input type="text" placeholder="홍길동">
+        </div>
+        <div class="form-group">
+          <label>연락처</label>
+          <input type="tel" placeholder="010-0000-0000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>이메일</label>
+        <input type="email" placeholder="example@email.com">
+      </div>
+      <div class="form-group">
+        <label>문의 내용</label>
+        <textarea placeholder="문의하실 내용을 자유롭게 입력해 주세요."></textarea>
+      </div>
+      <button class="form-submit">문의 보내기 →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">BA<span>TECH</span> (주)비에이텍</div>
+    <div class="footer-copy">© 2024 (주)비에이텍. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+// Smooth active nav highlight
+const sections = document.querySelectorAll('section[id], div[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? '#fff' : '';
+  });
+});
+
+// Form submit feedback
+document.querySelector('.form-submit').addEventListener('click', () => {
+  alert('문의가 접수되었습니다. 빠른 시일 내에 연락 드리겠습니다.');
+});
+</script>
+</body>
+</html>
