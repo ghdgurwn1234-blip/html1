@@ -605,6 +605,21 @@ footer {
   </div>
 </footer>
 
+<audio id="bgm" loop autoplay preload="auto">
+  <source src="bgm.mp3" type="audio/mpeg">
+  브라우저가 오디오를 지원하지 않습니다.
+</audio>
+
+<!-- 음소거 토글 버튼 -->
+<button onclick="toggleBGM()" id="bgm-btn"
+  style="
+    position: fixed; bottom: 24px; right: 24px;
+    z-index: 9999; background: rgba(0,0,0,0.55);
+    color: #fff; border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%; width: 44px; height: 44px;
+    font-size: 20px; cursor: pointer;
+  ">🔊</button>
+
 <script>
 // Smooth active nav highlight
 const sections = document.querySelectorAll('section[id], div[id]');
@@ -618,6 +633,25 @@ window.addEventListener('scroll', () => {
     a.style.color = a.getAttribute('href') === '#' + current ? '#fff' : '';
   });
 });
+
+// Background music control
+const bgm = document.getElementById('bgm');
+if (bgm) {
+  bgm.volume = 0.3;
+  bgm.play().catch(() => {
+    // 자동 재생이 차단될 경우, 첫 클릭 시 재생
+    document.addEventListener('click', () => {
+      if (bgm.paused) bgm.play();
+    }, { once: true });
+  });
+}
+
+function toggleBGM() {
+  const btn = document.getElementById('bgm-btn');
+  if (!bgm) return;
+  bgm.muted = !bgm.muted;
+  btn.textContent = bgm.muted ? '🔇' : '🔊';
+}
 
 // Form submit feedback
 document.querySelector('.form-submit').addEventListener('click', () => {
