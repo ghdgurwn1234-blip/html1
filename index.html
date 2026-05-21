@@ -381,6 +381,40 @@ footer {
 }
 .form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
 
+/* ── BROCHURE ── */
+.brochure-panel-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 18px;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.brochure-panel-container::-webkit-scrollbar {
+  height: 10px;
+}
+.brochure-panel-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.06);
+}
+.brochure-panel-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 86, 179, 0.25);
+  border-radius: 999px;
+}
+.brochure-panel {
+  flex: 0 0 100%;
+  min-width: 320px;
+  max-width: 100%;
+  scroll-snap-align: center;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(0, 86, 179, 0.08);
+}
+.brochure-panel object {
+  width: 100%;
+  height: 720px;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .services-grid { grid-template-columns: 1fr; }
@@ -389,6 +423,7 @@ footer {
   .stats-inner { grid-template-columns: 1fr; }
   .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
   .form-row { grid-template-columns: 1fr; }
+  .brochure-panel { min-width: 280px; }
   nav { display: none; }
 }
 </style>
@@ -516,6 +551,51 @@ footer {
   </div>
 </section>
 
+<!-- BROCHURE -->
+<section id="brochure" style="background: #f8fbff; padding: 60px 24px; text-align: center;">
+  <div class="container">
+    <div class="section-tag">BROCHURE</div>
+    <h2 class="section-title" style="color: var(--dark);">비에이텍 브로슈어</h2>
+    <p class="section-sub" style="max-width: 720px; margin: 0 auto 32px; color: #555;">
+      (주)비에이텍의 주요 서비스와 기술을 한눈에 볼 수 있는 브로슈어입니다. 아래에서 가로로 넘기면서 각 페이지를 확인해 보세요.
+    </p>
+    <div class="brochure-panel-container">
+      <div class="brochure-panel">
+        <object data="batech_brochure.pdf#page=1" type="application/pdf">
+          <p style="padding: 40px; color: #333; background: #fff; text-align: center;">
+            PDF를 임베드할 수 없습니다. 아래 버튼을 눌러 브로슈어를 열거나 다운로드하세요.<br>
+            <a href="batech_brochure.pdf" target="_blank" class="btn-primary" style="margin-top: 20px; display: inline-block; padding: 14px 32px;">📄 브로슈어 보기</a>
+          </p>
+        </object>
+      </div>
+      <div class="brochure-panel">
+        <object data="batech_brochure.pdf#page=2" type="application/pdf">
+          <p style="padding: 40px; color: #333; background: #fff; text-align: center;">
+            PDF를 임베드할 수 없습니다. 아래 버튼을 눌러 브로슈어를 열거나 다운로드하세요.<br>
+            <a href="batech_brochure.pdf" target="_blank" class="btn-primary" style="margin-top: 20px; display: inline-block; padding: 14px 32px;">📄 브로슈어 보기</a>
+          </p>
+        </object>
+      </div>
+      <div class="brochure-panel">
+        <object data="batech_brochure.pdf#page=3" type="application/pdf">
+          <p style="padding: 40px; color: #333; background: #fff; text-align: center;">
+            PDF를 임베드할 수 없습니다. 아래 버튼을 눌러 브로슈어를 열거나 다운로드하세요.<br>
+            <a href="batech_brochure.pdf" target="_blank" class="btn-primary" style="margin-top: 20px; display: inline-block; padding: 14px 32px;">📄 브로슈어 보기</a>
+          </p>
+        </object>
+      </div>
+      <div class="brochure-panel">
+        <object data="batech_brochure.pdf#page=4" type="application/pdf">
+          <p style="padding: 40px; color: #333; background: #fff; text-align: center;">
+            PDF를 임베드할 수 없습니다. 아래 버튼을 눌러 브로슈어를 열거나 다운로드하세요.<br>
+            <a href="batech_brochure.pdf" target="_blank" class="btn-primary" style="margin-top: 20px; display: inline-block; padding: 14px 32px;">📄 브로슈어 보기</a>
+          </p>
+        </object>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT & MAP -->
 <section id="contact">
   <div class="container">
@@ -593,26 +673,6 @@ footer {
         <textarea placeholder="문의하실 내용을 자유롭게 입력해 주세요."></textarea>
       </div>
       <button class="form-submit">문의 보내기 →</button>
-    </div>
-  </div>
-</section>
-
-<!-- BROCHURE -->
-<section id="brochure" style="background: #f8fbff; padding: 60px 24px; text-align: center;">
-  <div class="container">
-    <div class="section-tag">BROCHURE</div>
-    <h2 class="section-title" style="color: var(--dark);">4면짜리 브로슈어</h2>
-    <p class="section-sub" style="max-width: 720px; margin: 0 auto 32px; color: #555;">
-      (주)비에이텍의 주요 서비스와 기술을 한눈에 볼 수 있는 4면짜리 브로슈어입니다.
-      아래에서 바로 확인해 보세요.
-    </p>
-    <div style="max-width: 1000px; margin: 0 auto; border: 1px solid rgba(0,86,179,0.15); border-radius: 12px; overflow: hidden; box-shadow: 0 12px 30px rgba(0,86,179,0.08);">
-      <object data="batech_brochure.pdf" type="application/pdf" width="100%" height="720px">
-        <p style="padding: 40px; color: #333; background: #fff; text-align: center;">
-          PDF를 임베드할 수 없습니다. 아래 버튼을 눌러 브로슈어를 열거나 다운로드하세요.<br>
-          <a href="batech_brochure.pdf" target="_blank" class="btn-primary" style="margin-top: 20px; display: inline-block; padding: 14px 32px;">📄 브로슈어 보기</a>
-        </p>
-      </object>
     </div>
   </div>
 </section>
